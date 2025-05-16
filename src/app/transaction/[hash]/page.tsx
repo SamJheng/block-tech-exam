@@ -1,7 +1,8 @@
+"use client";
 import TransactionDetail from "@/components/layout/transactionDetail";
 import { use } from 'react';
 type Params = Promise<{ hash: string }>;
-export default async function AccountPage(props: { params: Params }) {
+export default function AccountPage(props: { params: Params }) {
   const params = use(props.params);
   const { hash } =  params;
 
