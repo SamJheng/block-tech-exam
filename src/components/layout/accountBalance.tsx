@@ -24,8 +24,8 @@ export default function AccountBalance({address}: Props) {
     return (
         <div>
             <Card style={{ margin: '10px', padding: '10px' }}>
-                <h3>Account Address: {address}</h3>
-                <p>Balance: {formatEther(balance)} ETH</p>
+                <h3 className='text-2xl'>Account Address: {address}</h3>
+                <p>Balance: <b className=" text-orange-600">{formatEther(balance)} ETH</b></p>
             </Card>
         </div>
     );

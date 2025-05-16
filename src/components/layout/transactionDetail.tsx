@@ -8,7 +8,7 @@ import { EthereumEIP1559Transaction } from "@/lib/model/transaction";
 import { getTransactionType } from "@/lib/transactionType";
 import { BlockData } from "@/lib/model/blockData";
 import { getBlockByNumber } from "@/lib/service/block";
-import { Skeleton } from "@mui/material";
+import { Link, Skeleton } from "@mui/material";
 interface Props {
   txhash:string;
 }
@@ -43,15 +43,51 @@ export default function TransactionDetail({txhash}: Props) {
     return (
         <div>{transaction && Object.keys(transaction).length > 0 ?
             <Card style={{ margin: '10px', padding: '10px' }} key={transaction.hash}>
-                <h3>Transaction Hash: {transaction.hash}</h3>
-                <p>From: {transaction.from}</p>
-                <p>To: {transaction.to}</p>
-                <p>Value: {formatEther(transaction.value)} ETH</p>
-                <p>Block Number: {transaction.blockNumber}</p>
-                <p>Gas: {formatEther(transaction.gas)}</p>    
-                <p>Gas Price: {formatEther(transaction.gasPrice)} ETH</p>  
-                <p>Type: {getTransactionType(transaction.type)}</p> 
-                {block && <p>Date: {new Date(parseInt(block!.timestamp) * 1000).toLocaleString()}</p>}
+                <h3 className="text-2xl mb-2"><b>Transaction Hash:</b> {transaction.hash}</h3>
+                <p className="mb-2">
+                    <b>From:</b> 
+                    <Link 
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        href={'/account/'+transaction.from}>
+                           {transaction.from}
+                    </Link>
+                </p>
+                <p className="mb-2">
+                    <b>To:</b>  
+                    <Link 
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        href={'/account/'+transaction.to}>
+                           {transaction.to}
+                    </Link>
+                    
+                </p>
+                <p className=" text-orange-600 mb-2">
+                    <b>Value:</b>  
+                    {formatEther(transaction.value)} ETH
+                </p>
+                <p className="mb-2">
+                    <b>Block Number:</b> 
+                    {transaction.blockNumber}
+                </p>
+                <p className="mb-2">
+                    <b>Gas:</b>  
+                    {formatEther(transaction.gas)}
+                </p>    
+                <p className="mb-2">
+                    <b>Gas Price:</b>  
+                    {formatEther(transaction.gasPrice)} ETH
+                </p>  
+                <p className="mb-2">
+                    <b>Type:</b>  
+                    {getTransactionType(transaction.type)}
+                </p> 
+                {block && 
+                <p>
+                    <b>Date:</b>  
+                    {new Date(parseInt(block!.timestamp) * 1000).toLocaleString()}
+                </p>}
                 
             </Card>:
             <Card>

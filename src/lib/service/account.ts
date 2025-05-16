@@ -15,7 +15,7 @@ export const getTransactionsByAccount = (
       startblock: 0,
       endblock: 99999999,
       page: 1,
-      offset: 10,
+      offset: 100,
       sort: "asc",
       apikey: apiKey,
     },

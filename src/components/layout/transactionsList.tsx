@@ -48,11 +48,21 @@ export default function TransactionsList({address}: Props) {
             <Table stickyHeader sx={{ minWidth: 650 }} aria-label="transactions table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Transaction Hash</TableCell>
-                        <TableCell>From</TableCell>
-                        <TableCell>To</TableCell>
-                        <TableCell align="right">Balance (ETH)</TableCell>
-                        <TableCell>Date</TableCell>
+                        <TableCell>
+                            <b>Transaction Hash</b>
+                        </TableCell>
+                        <TableCell>
+                            <b>From</b>
+                        </TableCell>
+                        <TableCell>
+                            <b>To</b>
+                        </TableCell>
+                        <TableCell align="right">
+                            <b>Balance (ETH)</b>
+                        </TableCell>
+                        <TableCell>
+                            <b>Date</b>
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
