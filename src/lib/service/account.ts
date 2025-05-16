@@ -1,7 +1,11 @@
 import axios from "axios";
 import { apiUrl } from "../model/etherscan";
+import { ResponseResult } from "../model/response";
+import { EthereumTransaction } from "../model/transaction";
 
-export const getTransactionsByAccount = (address:string) => {
+export const getTransactionsByAccount = (
+  address: string
+): Promise<ResponseResult<EthereumTransaction[]>> => {
   const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY;
   const query = axios.get(`${apiUrl}`, {
     params: {
@@ -13,6 +17,19 @@ export const getTransactionsByAccount = (address:string) => {
       page: 1,
       offset: 10,
       sort: "asc",
+      apikey: apiKey,
+    },
+  });
+  return query.then((res) => res.data);
+};
+export const getBalanceByAccount = (address: string): Promise<ResponseResult<string>> => {
+  const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY;
+  const query = axios.get(`${apiUrl}`, {
+    params: {
+      module: "account",
+      action: "balance",
+      address,
+      tag: "latest",
       apikey: apiKey,
     },
   });

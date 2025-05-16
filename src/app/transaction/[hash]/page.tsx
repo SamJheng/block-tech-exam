@@ -8,7 +8,7 @@ export default async function AccountPage({ params }: Props) {
   const { hash } = await params;
 
   return (
-    <div>
+    <div className="flex items-center justify-center max-w-[1200px] mx-auto min-h-screen">
       <TransactionDetail txhash={hash} />
     </div>
   );

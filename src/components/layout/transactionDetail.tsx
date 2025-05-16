@@ -3,18 +3,31 @@ import { getTransactionsByAccount } from "@/lib/service/account";
 import { use, useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import { getTransactionsByHash } from "@/lib/service/transaction";
+import { formatEther } from 'ethers';
+import { EthereumEIP1559Transaction } from "@/lib/model/transaction";
+import { getTransactionType } from "@/lib/transactionType";
+import { BlockData } from "@/lib/model/blockData";
+import { getBlockByNumber } from "@/lib/service/block";
 interface Props {
   txhash:string;
 }
 
 export default function TransactionDetail({txhash}: Props) {
-    const [transaction, setTransaction] = useState<any>({});
+    const [transaction, setTransaction] = useState<EthereumEIP1559Transaction<any[]>>();
+    const [block, setBlock] = useState<BlockData>();
     useEffect(() => {
-        const fetchTransactions = async () => {
+        const fetchData = async () => {
             const t = await getTransactionsByHash(txhash);
-            setTransaction(t.result);
+            if (t.result) {
+                setTransaction(t.result);
+                const b = await getBlockByNumber(t.result.blockNumber);
+                if (b.result) {
+                    setBlock(b.result);
+                }
+            }
+            
         };
-        fetchTransactions();
+        fetchData();
     }, [txhash]);
     
     return (
@@ -23,10 +36,13 @@ export default function TransactionDetail({txhash}: Props) {
                 <h3>Transaction Hash: {transaction.hash}</h3>
                 <p>From: {transaction.from}</p>
                 <p>To: {transaction.to}</p>
-                <p>Value: {transaction.value} ETH</p>
-                <p>Date: {new Date(transaction.timeStamp * 1000).toLocaleString()}</p>  
+                <p>Value: {formatEther(transaction.value)} ETH</p>
                 <p>Block Number: {transaction.blockNumber}</p>
-                <p>Gas Price: {transaction.gasPrice}</p>    
+                <p>Gas: {formatEther(transaction.gas)}</p>    
+                <p>Gas Price: {formatEther(transaction.gasPrice)} ETH</p>  
+                <p>Type: {getTransactionType(transaction.type)}</p> 
+                {block && <p>Date: {new Date(parseInt(block!.timestamp) * 1000).toLocaleString()}</p>}
+                
             </Card>:
             <div>Loading...</div>
             }

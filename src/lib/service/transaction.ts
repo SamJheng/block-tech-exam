@@ -1,7 +1,11 @@
 import axios from "axios";
 import { apiUrl } from "../model/etherscan";
+import { ResponseResult } from "../model/response";
+import { EthereumEIP1559Transaction } from "../model/transaction";
 
-export const getTransactionsByHash = (txhash: string) => {
+export const getTransactionsByHash = (
+  txhash: string
+): Promise<ResponseResult<EthereumEIP1559Transaction<any[]>>> => {
   const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY;
   const query = axios.get(`${apiUrl}`, {
     params: {
