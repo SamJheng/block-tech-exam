@@ -2,7 +2,7 @@
 import { getTransactionsByAccount } from "@/lib/service/account";
 import { use, useEffect, useState } from "react";
 import { formatEther } from 'ethers';
-import { Link } from "@mui/material";
+import { Link, Skeleton } from "@mui/material";
 import { EthereumTransaction } from "@/lib/model/transaction";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -27,7 +27,22 @@ export default function TransactionsList({address}: Props) {
         };
         fetchData();
     }, [address]);
-    
+    const loading = ()=>(
+        <>
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+        </>
+    );
     return (
         <TableContainer component={Paper}>
             <Table stickyHeader sx={{ minWidth: 650 }} aria-label="transactions table">
@@ -41,11 +56,7 @@ export default function TransactionsList({address}: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {transactions.length === 0 ? (
-                        <TableRow>
-                            <TableCell colSpan={5} align="center">No found transaction</TableCell>
-                        </TableRow>
-                    ) : (
+                    {transactions.length === 0 ? (loading()) : (
                         transactions.map((transaction) => (
                             <TableRow key={transaction.hash}>
                                 <TableCell>

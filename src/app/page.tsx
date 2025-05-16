@@ -9,6 +9,7 @@ export default function Home() {
   const [searchBy, setSearchBy] = useState(true);
   const [searchLabel, setSearchLabel] = useState("Address");
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   useEffect(() => {
     if (searchBy) {
@@ -21,7 +22,7 @@ export default function Home() {
     const path = searchBy
       ? `/account/${searchValue}`
       : `/transaction/${searchValue}`;
-
+    setLoading(true);
     router.push(path);
   };
   return (
@@ -37,9 +38,10 @@ export default function Home() {
           <TextField onChange={(e)=>{setSearchValue(e.target.value)}} className='w-full' id="outlined-basic" label={searchLabel} variant="outlined" />
         </div>
         <div className="flex items-center gap-4 mb-2">
-          <Button onClick={handleSearch} className='rounded-2xl w-3xl'  variant="contained" color="primary">
+          <Button loading={loading} onClick={handleSearch} className='rounded-2xl w-3xl'  variant="contained" color="primary">
             Search
           </Button>
+
         </div>
       </Card>
       

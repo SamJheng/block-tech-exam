@@ -8,6 +8,7 @@ import { EthereumEIP1559Transaction } from "@/lib/model/transaction";
 import { getTransactionType } from "@/lib/transactionType";
 import { BlockData } from "@/lib/model/blockData";
 import { getBlockByNumber } from "@/lib/service/block";
+import { Skeleton } from "@mui/material";
 interface Props {
   txhash:string;
 }
@@ -29,7 +30,16 @@ export default function TransactionDetail({txhash}: Props) {
         };
         fetchData();
     }, [txhash]);
-    
+    const loading = ()=>(
+        <>
+            <Skeleton variant="rectangular" className="rounded my-2" width={200} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={200} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={300} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+            <Skeleton variant="rectangular" className="rounded my-2" width={600} height={20} />
+        </>
+    );
     return (
         <div>{transaction && Object.keys(transaction).length > 0 ?
             <Card style={{ margin: '10px', padding: '10px' }} key={transaction.hash}>
@@ -44,7 +54,9 @@ export default function TransactionDetail({txhash}: Props) {
                 {block && <p>Date: {new Date(parseInt(block!.timestamp) * 1000).toLocaleString()}</p>}
                 
             </Card>:
-            <div>Loading...</div>
+            <Card>
+                {loading()}
+            </Card>
             }
         </div>
     );
