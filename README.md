@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Block Tech Doc
 
-## Getting Started
+Status: Next Up
+Date Created: May 16, 2025 8:12 PM
 
-First, run the development server:
+This is an easy-to-use app for searching Ethereum accounts and transaction hashes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The app is built with Next.js and TypeScript, integrating the Etherscan API.
+
+Try the live demo at [https://block-tech-exam.vercel.app/](https://block-tech-exam.vercel.app/)
+
+### env
+
+Your will add .env to root folder like this
+
+```jsx
+NEXT_PUBLIC_ETHERSCAN_API_KEY=Your api key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Core Framework:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 15.3.2 (React Framework)
+- TypeScript as the development language
+- React 19 as the frontend framework
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **UI Framework & Styling**:
 
-## Learn More
+- Material-UI (@mui/material) for UI components
+- Tailwind CSS for style management
+- Emotion for CSS-in-JS styling solution
 
-To learn more about Next.js, take a look at the following resources:
+### **Key Dependencies**:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- axios (^1.9.0) - HTTP client for API requests
+- ethers (^6.14.1) - Ethereum development library
+- @mui/material (^7.1.0) - Material UI components
+- @emotion/react & @emotion/styled (^11.14.0) - CSS-in-JS solution
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Development Tools**:
 
-## Deploy on Vercel
+- Turbopack for development server (as seen in the dev script)
+- ESLint for code linting
+- PostCSS for CSS processing
+- TypeScript for type safety
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **Project Structure**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+   /
+   ├── src/
+   │   ├── app/         # Next.js app router and pages
+   │   ├── components/  # React components
+   │   └── lib/         # Utility functions and shared libraries
+   ├── public/          # Static assets
+   ├── .next/          # Next.js build output
+   └── node_modules/    # Dependencies
+```
