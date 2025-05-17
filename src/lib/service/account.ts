@@ -4,7 +4,9 @@ import { ResponseResult } from "../model/response";
 import { EthereumTransaction } from "../model/transaction";
 
 export const getTransactionsByAccount = (
-  address: string
+  address: string,
+  page: number,
+  offset: number
 ): Promise<ResponseResult<EthereumTransaction[]>> => {
   const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY;
   const query = axios.get(`${apiUrl}`, {
@@ -14,8 +16,8 @@ export const getTransactionsByAccount = (
       address,
       startblock: 0,
       endblock: 99999999,
-      page: 1,
-      offset: 100,
+      page,
+      offset,
       sort: "asc",
       apikey: apiKey,
     },
