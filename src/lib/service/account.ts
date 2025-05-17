@@ -18,7 +18,7 @@ export const getTransactionsByAccount = (
       endblock: 99999999,
       page,
       offset,
-      sort: "asc",
+      sort: "desc",
       apikey: apiKey,
     },
   });
