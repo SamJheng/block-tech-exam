@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-4 mb-2">
           <Button loading={loading} onClick={handleSearch} className='rounded-2xl w-3xl'  variant="contained" color="primary">
-            Search
+            EHT Search
           </Button>
 
         </div>
