@@ -4,7 +4,7 @@ import { Card } from "@mui/material";
 import { useState, useEffect } from "react";
 import { formatEther } from 'ethers';
 import ErrorDailog from "../ui/error";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface Props {
   address:string;
