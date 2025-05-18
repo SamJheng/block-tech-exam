@@ -11,6 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ErrorDailog from "../ui/error";
+import { useRouter } from "next/navigation";
 
 interface Props {
   address:string;
@@ -21,12 +23,19 @@ export default function TransactionsList({address}: Props) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [total, setTotal] = useState(9999);
+    const [errorOpen, setErrorOpen] = useState(false);
+    const router = useRouter();
     useEffect(() => {
         const fetchData = async () => {
             const list = await getTransactionsByAccount(address, page + 1, rowsPerPage);
+            if (list.status==='0') {
+                setErrorOpen(true);
+                return;
+            }
             if (list.result) {
                 setTransactions(list.result);
             }
+            
         };
         fetchData();
     },  [address, page, rowsPerPage]);
@@ -48,6 +57,15 @@ export default function TransactionsList({address}: Props) {
     );
     return (
         <>
+            <ErrorDailog
+                isOpen={errorOpen}
+                errorContent="No found transaction for this address"
+                errorTitle="Something went wrong!"
+                onClose={() => {
+                    router.push('/');
+                }}
+                closeText="Close"
+            />
             <TableContainer component={Paper}>
                 <Table stickyHeader sx={{ minWidth: 650 }} aria-label="transactions table">
                     <TableHead>
