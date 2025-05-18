@@ -16,7 +16,7 @@ export default function AccountBalance({address}: Props) {
         const fetchData = async () => {
             const list = await getBalanceByAccount(address);
             
-            if (list.result) {
+            if (list.result && isNaN(Number(list.result))) {
                 setBalance(list.result);
             }
             
